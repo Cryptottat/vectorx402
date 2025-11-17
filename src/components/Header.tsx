@@ -25,11 +25,12 @@ const Header = () => {
         
         <nav className="header-nav">
           <a 
-            href="#" 
+            href="https://x.com/vectorx402" 
             className="nav-link"
             onMouseEnter={() => setActiveMenu('x')}
             onMouseLeave={() => setActiveMenu(null)}
-            onClick={(e) => e.preventDefault()}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <span className="nav-text">x</span>
             <span className="nav-underline" data-active={activeMenu === 'x'} />
@@ -54,6 +55,17 @@ const Header = () => {
             <span className="nav-text">app</span>
             <span className="nav-underline" data-active={activeMenu === 'app'} />
           </Link>
+          <a 
+            href="https://github.com/vectorx402/vectorx402" 
+            className="nav-link"
+            onMouseEnter={() => setActiveMenu('github')}
+            onMouseLeave={() => setActiveMenu(null)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="nav-text">github</span>
+            <span className="nav-underline" data-active={activeMenu === 'github'} />
+          </a>
         </nav>
       </div>
     </header>

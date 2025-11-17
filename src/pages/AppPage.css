@@ -63,7 +63,7 @@
 
 .app-page-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: var(--spacing-xl);
 }
@@ -101,11 +101,29 @@
 .wallet-connected {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md);
   border: 1px solid var(--accent-primary);
   background: rgba(99, 102, 241, 0.05);
   border-radius: 2px;
+}
+
+.disconnect-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  border-radius: 2px;
+  margin-left: var(--spacing-xs);
+}
+
+.disconnect-button:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .wallet-status-indicator {

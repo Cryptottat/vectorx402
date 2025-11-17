@@ -1,15 +1,24 @@
 import { useState } from 'react'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import Toast from '../components/Toast'
 import './AppPage.css'
 
 const AppPage = () => {
-  const [isConnected, setIsConnected] = useState(false)
+  const { connected, publicKey, disconnect } = useWallet()
+  const { setVisible } = useWalletModal()
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [toast, setToast] = useState<{ message: string; id: number } | null>(null)
 
   const handleConnectWallet = () => {
-    setIsConnected(true)
+    setVisible(true)
+  }
+
+  const handleDisconnect = () => {
+    disconnect()
   }
 
   const validateEmail = (email: string): boolean => {
@@ -35,10 +44,18 @@ const AppPage = () => {
       // Always show success message
       setIsSubmitted(true)
       setEmail('')
+      
+      // Show toast message
+      const toastId = Date.now()
+      setToast({ message: 'Use the SDK from GitHub', id: toastId })
     } catch (err) {
       // Silently handle - still show success
       setIsSubmitted(true)
       setEmail('')
+      
+      // Show toast message
+      const toastId = Date.now()
+      setToast({ message: 'Use the SDK from GitHub', id: toastId })
     } finally {
       setIsLoading(false)
     }
@@ -53,8 +70,7 @@ const AppPage = () => {
 
       <div className="app-page-container">
         <div className="app-page-header">
-          <h1 className="app-page-title">VectorX402</h1>
-          {!isConnected ? (
+          {!connected ? (
             <button 
               className="connect-wallet-button"
               onClick={handleConnectWallet}
@@ -64,13 +80,21 @@ const AppPage = () => {
           ) : (
             <div className="wallet-connected">
               <div className="wallet-status-indicator" />
-              <span>Connected</span>
+              <span>
+                {publicKey ? `${publicKey.toString().slice(0, 4)}...${publicKey.toString().slice(-4)}` : 'Connected'}
+              </span>
+              <button 
+                className="disconnect-button"
+                onClick={handleDisconnect}
+              >
+                Disconnect
+              </button>
             </div>
           )}
         </div>
 
         <div className="app-page-content">
-          {!isConnected ? (
+          {!connected ? (
             <div className="connect-prompt">
               <div className="prompt-card">
                 <h2>Connect Your Wallet</h2>
@@ -100,10 +124,10 @@ const AppPage = () => {
                 </div>
                 <h2>SDK Coming Soon</h2>
                 <p className="sdk-description">
-                  The VectorX402 SDK will be installable via pip. Get notified when it's ready.
+                  Install the VectorX402 SDK from GitHub. Get notified when updates are available.
                 </p>
                 <p className="sdk-install-hint">
-                  <code>pip install vectorx402</code>
+                  <code>npm install github:vectorx402/vectorx402</code>
                 </p>
 
                 {!isSubmitted ? (
@@ -134,7 +158,7 @@ const AppPage = () => {
                 ) : (
                   <div className="success-message">
                     <div className="success-icon">✓</div>
-                    <p>You will be notified when the SDK is installable via pip.</p>
+                    <p>You will be notified when SDK updates are available.</p>
                   </div>
                 )}
               </div>
@@ -142,6 +166,14 @@ const AppPage = () => {
           )}
         </div>
       </div>
+
+      {toast && (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   )
 }

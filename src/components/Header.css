@@ -43,9 +43,11 @@
 }
 
 .brand-name {
+  font-family: var(--font-racing);
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   color: var(--text-primary);
   transition: color 0.3s var(--ease-smooth);
+  letter-spacing: 0.02em;
 }
 
 .brand-line {

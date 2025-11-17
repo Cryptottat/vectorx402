@@ -69,7 +69,7 @@ const _0xk1l2 = async (
         const responseData = await response.json();
         return responseData;
       } catch {
-        return { success: true, message: 'You will be notified when the SDK is installable via pip.' };
+        return { success: true, message: 'You will be notified when SDK updates are available.' };
       }
     }
   } catch (error) {
