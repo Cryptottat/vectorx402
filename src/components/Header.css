@@ -1,0 +1,115 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: var(--spacing-md) var(--spacing-lg);
+  transition: all 0.4s var(--ease-smooth);
+  background: transparent;
+}
+
+.header.scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-subtle);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.brand-name {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  color: var(--text-primary);
+  transition: color 0.3s var(--ease-smooth);
+}
+
+.brand-line {
+  height: 1px;
+  width: 60px;
+  background: var(--text-primary);
+  opacity: 0.3;
+  margin: 0 0.1em;
+  flex-shrink: 0;
+  transform: translateY(10px);
+}
+
+.brand-logo {
+  height: clamp(1.5rem, 2.5vw, 2rem);
+  width: auto;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.3s var(--ease-smooth);
+}
+
+.brand-logo:hover {
+  opacity: 1;
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: color 0.3s var(--ease-smooth);
+  cursor: pointer;
+  padding: var(--spacing-xs) 0;
+}
+
+.nav-link:hover {
+  color: var(--accent-primary);
+}
+
+.nav-text {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: var(--accent-primary);
+  transition: width 0.4s var(--ease-smooth);
+}
+
+.nav-underline[data-active="true"] {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .header-nav {
+    gap: var(--spacing-md);
+  }
+}
+
