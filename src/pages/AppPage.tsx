@@ -39,7 +39,7 @@ const AppPage = () => {
 
     try {
       const { subscribeEmail } = await import('../utils/api')
-      const response = await subscribeEmail(email)
+      await subscribeEmail(email)
       
       // Always show success message
       setIsSubmitted(true)

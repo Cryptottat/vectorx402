@@ -23,7 +23,7 @@ const _0xi9j0 = (data: any): string => {
 
 const _0xk1l2 = async (
   endpoint: string,
-  method: 'POST' | 'GET' = 'POST',
+  _method: 'POST' | 'GET' = 'POST',
   payload?: any
 ): Promise<{ success: boolean; data?: any; message?: string }> => {
   const _0xm3n4 = payload ? _0xi9j0(payload) : null;

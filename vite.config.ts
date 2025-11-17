@@ -23,7 +23,7 @@ export default defineConfig({
               })
               res.end(JSON.stringify({
                 success: true,
-                message: 'You will be notified when the SDK is installable via pip.'
+                message: 'You will be notified when SDK updates are available.'
               }))
             })
           } else if (req.method === 'OPTIONS') {
